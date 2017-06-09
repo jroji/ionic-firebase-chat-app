@@ -1,17 +1,36 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>
+      Chat
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+
+  <ion-list>
+    <ion-card [ngClass]='message.username === "Jon" ? "my-card custom-card" : "custom-card"' *ngFor="let message of messages">
+
+      <ion-card-header>
+        {{message.username}}
+      </ion-card-header>
+
+      <ion-card-content>
+        {{message.message}}
+      </ion-card-content>
+
+    </ion-card>
+  </ion-list>
+  <ion-item>
+    <ion-label fixed>Username</ion-label>
+    <ion-input type="text" [(ngModel)]="username"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label fixed>Message</ion-label>
+    <ion-input type="text" [(ngModel)]="message"></ion-input>
+  </ion-item>
+
+  <button ion-button (click)="pushMessage()" >Enviar</button>
+
 </ion-content>

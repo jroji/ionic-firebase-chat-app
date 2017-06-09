@@ -1,39 +1,52 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
+import { AppComponent } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
+import { TabsPageComponent } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {HttpModule} from "@angular/http";
+import {ContactsService} from "../pages/contact/contacts.service";
+import {Camera} from "@ionic-native/camera";
+import {FormsModule} from "@angular/forms";
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
+import {environment} from "./environment";
 
 @NgModule({
   declarations: [
-    MyApp,
+    AppComponent,
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPageComponent
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    HttpModule,
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    IonicModule.forRoot(AppComponent)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
+    AppComponent,
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPageComponent
   ],
   providers: [
     StatusBar,
+    Camera,
     SplashScreen,
+    ContactsService,
+    AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
